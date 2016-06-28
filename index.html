@@ -3,39 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>ko tag</title>
-    <style>
-        .tag-wrap{border:1px solid #ccc;}
-        .tag{border-radius: 3px;color: #fff;padding: 2px 0 2px 8px;font-size: 12px;
-             display: inline-block;
-             margin: 2px 4px 2px 0;
-             line-height: 1.4;
-        }
-        .tag-blue{background: #33C3F0;}
-        .tag-input{border:0;outline:0;line-height:1.4;}
-        .tag-error{background: #FBD8DB;color: #90111A;width:68px;}        
-    </style>
+    <link rel="stylesheet" type="text/css" href="ko-tag.css" />
 </head>
 <body>
     <div style='width:300px;'>
-    <div class="tag-wrap">
-        <span data-bind="foreach:aTag">
-            <span class="tag tag-blue">
-                <span data-bind="text:$data"></span>
-                <span data-bind="click:$parent.fDelete">×</span>
-            </span>
-            <span data-bind="text:$parent.sSeparator"></span>
-        </span>
-        <input data-bind="textInput:sText,event:{keyup:fInputKeyup},css:sTextClass" type="text" class="tag-input"/>
-    </div>
+        <tag-widget params="sSeparator:'或'"></tag-widget>
     </div>
     
     <script src="knockout-3.4.0.js"></script>
     <script type="text/javascript" src="ko-tag.js"></script>
     <script>
-        var options = {
-            sSeparator : '或'
-        };
-        ko.applyBindings(new fKoTag(options));
+        ko.applyBindings(new fMainView());
+        function fMainView() {
+            
+        }
     </script>
 </body>
 </html>

@@ -23,6 +23,9 @@
             }
             return false;
         });
+        self.fDelete = function(item) {
+            self.aTag.remove(item);
+        }
     }
     fKoTag.prototype.fAdd = function() {
         var self = this;
@@ -32,10 +35,10 @@
         self.aTag.push(self.sText());
         self.sText('');
     }
-    fKoTag.prototype.fDelete = function(item) {
-        var self = this;
-        self.aTag.remove(item);
-    }
+    // fKoTag.prototype.fDelete = function(item) {
+    //     var self = this;
+    //     self.aTag.remove(item);
+    // }
     fKoTag.prototype.fbDuplicate = function(val) {
         var self = this;
         var aTag = self.aTag();
@@ -57,5 +60,19 @@
         }
     }
 
-    window["fKoTag"] = fKoTag;
+    //window["fKoTag"] = fKoTag;
+    ko.components.register('tag-widget', {
+        viewModel: fKoTag,
+        template:
+            '<div class="tag-wrap">'
+          +      '<span data-bind="foreach:aTag">'
+          +          '<span class="tag tag-blue">'
+          +              '<span data-bind="text:$data"></span>'
+          +              '<span data-bind="click:$parent.fDelete" class="tag-del">×</span>'
+          +          '</span>'
+          +          '<span data-bind="text:$parent.sSeparator"></span>'
+          +      '</span>'
+          +      '<input data-bind="textInput:sText,event:{keyup:fInputKeyup},css:sTextClass" type="text" class="tag-input"/>'
+          +  '</div>'
+    });
 })();

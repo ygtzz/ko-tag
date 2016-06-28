@@ -1,0 +1,10 @@
+ .tag-wrap{border:1px solid #ccc;}
+ .tag{border-radius: 3px;color: #fff;padding: 2px 0 2px 8px;font-size: 12px;
+      display: inline-block;
+      margin: 2px 4px;
+      line-height: 1.4;
+ }
+ .tag-blue{background: #33C3F0;}
+ .tag-del{margin:0 2px;}
+ .tag-input{width:80px;border:0;outline:0;line-height:1.4;border-radius:3px;margin-left:4px;padding-left:4px;}
+ .tag-error{background: #FBD8DB;color: #90111A;width:68px;}      
