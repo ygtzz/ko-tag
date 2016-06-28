@@ -58,6 +58,7 @@
             default:
                 break;
         }
+        evt.stopPropagation();
     }
 
     //window["fKoTag"] = fKoTag;

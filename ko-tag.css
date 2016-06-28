@@ -1,4 +1,4 @@
- .tag-wrap{border:1px solid #ccc;}
+ .tag-wrap{border:1px solid #ccc;text-align:left;}
  .tag{border-radius: 3px;color: #fff;padding: 2px 0 2px 8px;font-size: 12px;
       display: inline-block;
       margin: 2px 4px;
