@@ -17,7 +17,7 @@
 </head>
 <body>
     <div style='width:300px;'>
-        <div class="tag-wrap">
+    <div class="tag-wrap">
         <span data-bind="foreach:aTag">
             <span class="tag tag-blue">
                 <span data-bind="text:$data"></span>
@@ -30,60 +30,12 @@
     </div>
     
     <script src="knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="ko-tag.js"></script>
     <script>
-        var option = {
+        var options = {
             sSeparator : '或'
         };
-        ko.applyBindings(new fTagView());
-        function fTagView(){
-            var self = this;
-            self.sSeparator = ko.observable(option['sSeparator'] || '');
-            self.bAllowDuplicate = ko.observable(option['bAllowDuplicate'] || false);
-            self.bAllowEmpty = ko.observable(option['bAllowEmpty'] || false);           
-            self.aTag = ko.observableArray();
-            self.fAdd = function(){
-                if(self.bTextError()){
-                    return;
-                }
-                self.aTag.push(self.sText());
-                self.sText('');
-            }
-            self.fDelete = function(item){
-                self.aTag.remove(item);
-            }
-            self.fbDuplicate = function(val){
-                var aTag = self.aTag();
-                for(var i=0;len=aTag.length,i<len;i++){
-                    if(aTag[i] === val){
-                        return true;
-                    }
-                }
-                return false;
-            }
-            self.sText = ko.observable();
-            self.sTextClass = ko.pureComputed(function(){
-                var sText = self.sText();
-                if(!option.bAllowDuplicate && self.fbDuplicate(sText)){
-                    return 'tag-error';
-                }
-                if(!option.bAllowEmpty && sText && sText.length < 1){
-                    return 'tag-error';
-                }
-                return '';
-            });
-            self.bTextError = ko.pureComputed(function(){
-                return self.sTextClass().indexOf('tag-error') > -1;
-            });
-            self.fInputKeyup = function(data,evt){
-                switch(evt.keyCode){
-                    case 13:
-                        self.fAdd();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        ko.applyBindings(new fKoTag(options));
     </script>
 </body>
 </html>
