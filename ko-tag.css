@@ -5,6 +5,7 @@
       line-height: 1.4;
  }
  .tag-blue{background: #33C3F0;}
- .tag-del{margin:0 2px;}
- .tag-input{width:80px;border:0;outline:0;line-height:1.4;border-radius:3px;margin-left:4px;padding-left:4px;}
- .tag-error{background: #FBD8DB;color: #90111A;width:68px;}      
+ .tag-orange{background: #ff510d;}
+ .tag-del{margin:0 2px;cursor:pointer}
+ .tag-input{width:150px;border:0;outline:0;line-height:1.4;border-radius:3px;padding:6px 4px;}
+ .tag-error{background: #FBD8DB;color: #90111A;width:80px;}

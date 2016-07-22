@@ -2,13 +2,14 @@
     function fKoTag(options) {
         var self = this;
         self.options = options;
-        self.sSeparator = ko.observable(options['sSeparator'] || '');
-        self.bAllowDuplicate = ko.observable(options['bAllowDuplicate'] || false);
-        self.bAllowEmpty = ko.observable(options['bAllowEmpty'] || false);
-        self.aTag = ko.observableArray();
+        self.sSeparator = ko.observable(options['separator'] || '');
+        self.sPlaceholder = ko.observable(options['placeholder'] || '');
+        self.sWrapClass = ko.observable(options['wrapclass'] || '');
+        self.nBackspaceCount = 0;
+        self.aTag = self.options.value || ko.observableArray();
         self.sText = ko.observable();
         self.sTextClass = ko.pureComputed(function() {
-            if(self.bTextError()){
+            if (self.bTextError()) {
                 return 'tag-error';
             }
             return '';
@@ -16,9 +17,6 @@
         self.bTextError = ko.pureComputed(function() {
             var sText = self.sText();
             if (!self.options.bAllowDuplicate && self.fbDuplicate(sText)) {
-                return true;
-            }
-            if (!self.options.bAllowEmpty && sText && sText.length < 1) {
                 return true;
             }
             return false;
@@ -32,13 +30,24 @@
         if (self.bTextError()) {
             return;
         }
+        var sText = self.sText();
+        if (!self.options.bAllowEmpty && sText !== undefined && sText !== null && sText.length < 1) {
+            return;
+        }
         self.aTag.push(self.sText());
         self.sText('');
     }
-    // fKoTag.prototype.fDelete = function(item) {
-    //     var self = this;
-    //     self.aTag.remove(item);
-    // }
+    fKoTag.prototype.fDeleteLast = function() {
+        var self = this;
+        var sText = self.sText();
+        if (sText === undefined || sText === null || self.sText().length === 0) {
+            self.nBackspaceCount++;
+            if (self.nBackspaceCount > 1) {
+                self.aTag.pop();
+                self.nBackspaceCount = 0;
+            }
+        }
+    }
     fKoTag.prototype.fbDuplicate = function(val) {
         var self = this;
         var aTag = self.aTag();
@@ -55,6 +64,9 @@
             case 13:
                 self.fAdd();
                 break;
+            case 8:
+                self.fDeleteLast();
+                break;
             default:
                 break;
         }
@@ -64,16 +76,15 @@
     //window["fKoTag"] = fKoTag;
     ko.components.register('tag-widget', {
         viewModel: fKoTag,
-        template:
-            '<div class="tag-wrap">'
-          +      '<span data-bind="foreach:aTag">'
-          +          '<span class="tag tag-blue">'
-          +              '<span data-bind="text:$data"></span>'
-          +              '<span data-bind="click:$parent.fDelete" class="tag-del">×</span>'
-          +          '</span>'
-          +          '<span data-bind="text:$parent.sSeparator"></span>'
-          +      '</span>'
-          +      '<input data-bind="textInput:sText,event:{keyup:fInputKeyup},css:sTextClass" type="text" class="tag-input"/>'
-          +  '</div>'
+        template: '<div data-bind="css:sWrapClass" class="tag-wrap">' 
+                        + '<span data-bind="foreach:aTag">' 
+                                + '<span data-bind="text:$parent.sSeparator,visible:$index()>0"></span>' 
+                                + '<span class="tag tag-orange">' 
+                                    + '<span data-bind="text:$data"></span>' 
+                                    + '<span data-bind="click:$parent.fDelete" class="tag-del">×</span>' 
+                                + '</span>' 
+                        + '</span>' 
+                        + '<input data-bind="textInput:sText,event:{keyup:fInputKeyup},css:sTextClass,attr:{placeholder:sPlaceholder}" type="text" class="tag-input"/>' 
+                    + '</div>'
     });
 })();
