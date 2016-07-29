@@ -27,10 +27,6 @@ knockout的tag组件，回车完成tag键入
 - bAllowEmpty: 是否允许空值为tag，默认false，不需要空值
 - wrapclass: 组件外部包裹的css class，可自定义组件的样式
 
-###编译
-
-运行命令 fis3 release -d ./output 生成合成文件
-
 ###bug
 
 1. backspace删除需要按两次才能删除tag
