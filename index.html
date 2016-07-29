@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>ko tag</title>
     <link rel="stylesheet" type="text/css" href="ko-tag.css" />
 </head>
+
 <body>
-    <div style='width:300px;'>
-        <tag-widget params="sSeparator:'或'"></tag-widget>
+    <div style='width:300px;margin:0 auto;margin-top:280px;'>
+        <ko-tag params="separator:'或',placeholder:'请输入关键字，回车提交'"></ko-tag>
     </div>
-    
+
     <script src="knockout-3.4.0.js"></script>
     <script type="text/javascript" src="ko-tag.js"></script>
     <script>
         ko.applyBindings(new fMainView());
+
         function fMainView() {
-            
+
         }
     </script>
 </body>
+
 </html>
