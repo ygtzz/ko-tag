@@ -74,7 +74,7 @@
     }
 
     //window["fKoTag"] = fKoTag;
-    ko.components.register('tag-widget', {
+    ko.components.register('ko-tag', {
         viewModel: fKoTag,
         template: '<div data-bind="css:sWrapClass" class="tag-wrap">' 
                         + '<span data-bind="foreach:aTag">' 
