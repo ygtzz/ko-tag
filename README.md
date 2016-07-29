@@ -24,6 +24,7 @@ knockout的tag组件，回车完成tag键入
 - placeholder: 组件中的提示文字
 - value : 外部传入的tag数组，必须为observableArray,否则外部无法获取value值
 - bAllowDuplicate: 是否允许tag重复，默认false，不允许重复，会有红色提示
+- bAllowEmpty: 是否允许空值为tag，默认false，不需要空值
 - wrapclass: 组件外部包裹的css class，可自定义组件的样式
 
 ###编译
