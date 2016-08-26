@@ -14,7 +14,7 @@ knockout的tag组件，回车完成tag键入
 
 ####引用
 
-```javascript
+```html
 <ko-tag params="separator:'or',placeholder:'placeholder',value:aTag,bAllowDuplicate:'true',wrapclass:'tag-com'"></ko-tag>
 ```
 
